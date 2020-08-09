@@ -6,7 +6,11 @@
 			</div>
 			<input type="text" class="input" id="search-term"></input>
 			<div class="input-group-append">
-				<button @click="search" type="button" class="btn btn-outline-primary" id="search-button">Search</button>
+				<button @click="search" type="button" class="btn btn-outline-primary" id="search-button">
+					<span v-if="showProgress" class="spinner-border spinner-border-sm"></span>
+					<span v-else class="d-none"></span>
+					Search
+				</button>
 			</div>
 		</div>
 		<div class="input-group mb-3">
@@ -21,23 +25,37 @@
 			</div>
 			<input type="text" id="api-key"></input>
 		</div>
+
+		<ul class="container overflow-auto">
+			<li v-for="tweet in tweets">
+				{{tweet}}
+			</li>
+		</ul>
 	</div>
 </template>
 
 <script>
+	import Sentiment from './Sentiment.vue'
 	import Twitter from 'twitter-lite'
 	const search = require('../services/search.js').search
 
 	export default {
 		name: 'landing-page',
 		components: { 
-			// SystemInformation 
+			Sentiment
+		},
+		data: () => {
+			return {
+				tweets: [],
+				showProgress: false
+			}
 		},
 		methods: {
 			open (link) {
 				this.$electron.shell.openExternal(link)
 			},
-			search: async (event) => {
+			search: async function (event) {
+				this.showProgress = true
 				let results = await search(
 					document.getElementById('search-term').value,
 					new Twitter({
@@ -45,6 +63,9 @@
 						consumer_secret: document.getElementById('api-key').value
 					})
 				)
+
+				this.tweets.push("TEST")
+				this.showProgress = false
 			}
 		}
 	}
