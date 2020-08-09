@@ -1,17 +1,17 @@
 <template>
-	<div class="container-fluid" id="wrapper">
+	<v-container class="container-fluid" id="wrapper">
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text">Search Term</span>
 			</div>
-			<input type="text" class="input" id="search-term"></input>
+			<v-text-field type="text" class="input" id="search-term"></v-text-field>
 			<div class="input-group-append">
-				<button @click="search" type="button" class="btn btn-outline-primary" id="search-button">
+				<v-btn @click="search" outlined type="button" class="btn btn-outline-primary" id="search-button">
 					<transition name="fade">
 						<span v-if="showProgress" class="spinner-border spinner-border-sm"></span>
 					</transition>
 					Search
-				</button>
+				</v-btn>
 			</div>
 		</div>
 		<div class="input-group mb-3">
@@ -34,7 +34,7 @@
 				{{tweet}}
 			</li>
 		</ul>
-	</div>
+	</v-container>
 </template>
 
 <script>
