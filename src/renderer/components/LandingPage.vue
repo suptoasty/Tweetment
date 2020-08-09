@@ -7,8 +7,9 @@
 			<input type="text" class="input" id="search-term"></input>
 			<div class="input-group-append">
 				<button @click="search" type="button" class="btn btn-outline-primary" id="search-button">
-					<span v-if="showProgress" class="spinner-border spinner-border-sm"></span>
-					<span v-else class="d-none"></span>
+					<transition name="fade">
+						<span v-if="showProgress" class="spinner-border spinner-border-sm"></span>
+					</transition>
 					Search
 				</button>
 			</div>
@@ -25,6 +26,8 @@
 			</div>
 			<input type="text" id="api-key"></input>
 		</div>
+
+		<button @click="showProgress = !showProgress">Toggle</button>
 
 		<ul class="container overflow-auto">
 			<li v-for="tweet in tweets">
@@ -66,12 +69,25 @@
 
 				this.tweets.push("TEST")
 				this.showProgress = false
-			}
+			},
 		}
 	}
 </script>
 
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+	
+	.fade-enter{
+        opacity: 0;
+    }
+    .fade-enter-active{
+        transition: opacity 1s;
+    }
+    .fade-leave{
+        /* opacity: 1; */
+    }
+    .fade-leave-active{
+        transition: opacity 1s;
+        opacity: 0;
+    }
 </style>
