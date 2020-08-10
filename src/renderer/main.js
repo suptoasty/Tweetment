@@ -4,10 +4,10 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
 Vue.use(Vuetify)
 
-let $ = require('jquery')
-import 'popper.js'
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// let $ = require('jquery')
+// import 'popper.js'
+// import 'bootstrap'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App'
 import router from './router'
@@ -26,7 +26,7 @@ Vue.config.productionTip = false
 new Vue({
   vuetify: new Vuetify({
 		theme: {
-		  dark: true,
+		  dark: false,
 		  themes: {
 			dark: {
 			  primary: '#00F195',

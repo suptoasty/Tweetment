@@ -1,39 +1,75 @@
 <template>
-	<v-container class="container-fluid" id="wrapper">
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text">Search Term</span>
-			</div>
-			<v-text-field type="text" class="input" id="search-term"></v-text-field>
-			<div class="input-group-append">
-				<v-btn @click="search" outlined type="button" class="btn btn-outline-primary" id="search-button">
-					<transition name="fade">
-						<span v-if="showProgress" class="spinner-border spinner-border-sm"></span>
-					</transition>
+	<v-container id="wrapper">
+		<v-row>
+			<v-text-field id="consumer-key"
+				label="Consumer Key" 
+				hide-details="auto"
+				outlined
+			></v-text-field>
+		</v-row>
+		<br>
+		<v-row>
+			<v-text-field id="api-key"
+				label="Consumer Secret" 
+				hide-details="auto"
+				outlined
+			></v-text-field>
+		</v-row>
+		<br>
+		<v-row>
+			<v-input>
+				<v-text-field id="search-term"
+					label="Search Term" 
+					hide-details="auto"
+					outlined
+					style="margin-right: 15px;"
+				></v-text-field>
+				<v-btn @click="search" id="search-button"
+					:loading="showProgress"
+					outlined
+					x-large
+				>
+					<!-- <transition name="fade">
+						<v-progress-circular v-if="showProgress"
+							indeterminate="indeterminate"
+						></v-progress-circular>
+					</transition> -->
 					Search
 				</v-btn>
-			</div>
-		</div>
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text">Consumer Key</span>
-			</div>
-			<input type="text" id="consumer-key"></input>
-		</div>
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text">Consumer Secret</span>
-			</div>
-			<input type="text" id="api-key"></input>
-		</div>
+			</v-input>
+		</v-row>
 
-		<button @click="showProgress = !showProgress">Toggle</button>
-
-		<ul class="container overflow-auto">
-			<li v-for="tweet in tweets">
-				{{tweet}}
-			</li>
-		</ul>
+		<v-container v-for="response in responses">
+			<v-card
+				class="mx-auto"
+				color="#26c6da"
+				dark
+				max-width="400"
+			>
+				<v-card-title>
+					<v-icon
+						large
+						left
+					>
+						mdi-twitter
+					</v-icon>
+					<span class="title font-weight-light">Twitter</span>
+				</v-card-title>
+				<v-card-text class="headline font-weight-bold">
+					{{response.tweet.text}}
+				</v-card-text>
+				<v-card-actions>
+					<v-list-item class="grow">
+						<v-list-item-content>
+							<v-icon class="mr-1">mdi-heart</v-icon>
+							<span class="subheading mr-2">
+								{{response.sentiment}}
+							</span>
+						</v-list-item-content>
+					</v-list-item>
+				</v-card-actions>
+			</v-card>
+		</v-container>
 	</v-container>
 </template>
 
@@ -49,7 +85,7 @@
 		},
 		data: () => {
 			return {
-				tweets: [],
+				responses: [],
 				showProgress: false
 			}
 		},
@@ -59,7 +95,7 @@
 			},
 			search: async function (event) {
 				this.showProgress = true
-				let results = await search(
+				this.responses = await search(
 					document.getElementById('search-term').value,
 					new Twitter({
 						consumer_key: document.getElementById('consumer-key').value,
@@ -67,7 +103,6 @@
 					})
 				)
 
-				this.tweets.push("TEST")
 				this.showProgress = false
 			},
 		}
