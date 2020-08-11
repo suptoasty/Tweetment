@@ -55,17 +55,35 @@
 					</v-icon>
 					<span class="title font-weight-light">Twitter</span>
 				</v-card-title>
+
 				<v-card-text class="headline font-weight-bold">
-					{{response.tweet.text}}
+					{{response.tweet}}
 				</v-card-text>
+
 				<v-card-actions>
 					<v-list-item class="grow">
-						<v-list-item-content>
-							<v-icon class="mr-1">mdi-heart</v-icon>
-							<span class="subheading mr-2">
-								{{response.sentiment}}
+						<!-- <v-list-item-content>
+							Hastags:
+							<span v-for="hastag in response.hastags">
+								{{hastag}}
 							</span>
-						</v-list-item-content>
+							<br>
+							<span>
+								Favorites: {{response.likes}}
+							</span>
+						</v-list-item-content> -->
+						<!-- <v-list-item-content>
+							<span class="subheading mr-2">
+								Retweets: {{response.retweets}}
+							</span>
+						</v-list-item-content> -->
+						<v-row
+							align="center"
+							justify="end"
+						>
+							<v-icon class="mr-1">mdi-heart</v-icon>
+							<span class="subheading mr-2">{{response.sentiment}}</span>
+						</v-row>
 					</v-list-item>
 				</v-card-actions>
 			</v-card>
@@ -110,8 +128,6 @@
 </script>
 
 <style>
-	@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-	
 	.fade-enter{
         opacity: 0;
     }

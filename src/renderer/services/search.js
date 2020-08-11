@@ -28,16 +28,15 @@ export async function search(query="Godot Engine", user=new Twitter({}), lang="e
         response.statuses.forEach(element => {
             let sentiment = analyzer.getSentiment(tokenizer.tokenize(element.text))
             tweets.push({
-                tweet: element,
+                tweet: element.text,
                 sentiment: sentiment,
-                retweets: 0,
-                likes: 0,
-                hashtags: []
+                retweets: element.entities.retweet_count,
+                likes: element.entities.favorite_count,
+                hashtags: element.entities.hashtags
             })
         });
 
         return tweets
-
     } catch(e) {
         console.log("There was an error calling Twitter API.");
         console.dir(e);
