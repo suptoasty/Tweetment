@@ -5,6 +5,7 @@
 				label="Consumer Key" 
 				hide-details="auto"
 				outlined
+				filled
 			></v-text-field>
 		</v-row>
 		<br>
@@ -13,6 +14,7 @@
 				label="Consumer Secret" 
 				hide-details="auto"
 				outlined
+				filled
 			></v-text-field>
 		</v-row>
 		<br>
@@ -22,6 +24,7 @@
 					label="Search Term" 
 					hide-details="auto"
 					outlined
+					filled
 					style="margin-right: 15px;"
 				></v-text-field>
 				<v-btn @click="search" id="search-button"
