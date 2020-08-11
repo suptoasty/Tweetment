@@ -4,10 +4,7 @@ import axios from 'axios'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
 
-// let $ = require('jquery')
-// import 'popper.js'
-// import 'bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css'
+import VueParticles from 'vue-particles'
 
 import App from './App'
 import router from './router'
@@ -21,37 +18,53 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
+Vue.use(VueParticles)
 Vue.use(Vuetify)
 
 /* eslint-disable no-new */
 new Vue({
   vuetify: new Vuetify({
-		icons: {
-			iconfont: 'mdi', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+	icons: {
+		iconfont: 'mdi', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+		values: {},
+	},
+	lang: {
+		current: 'en',
+		// locales: { 'en' },
+		// t: undefined  as any,
+	},
+	rtl: false,
+	theme: {
+		dark: false,
+		default: 'light',
+		disable: false,
+		options: {
+			cspNonce: undefined,
+			customProperties: undefined,
+			minifyTheme: undefined,
+			themeCache: undefined,
 		},
-		theme: {
-		  dark: false,
-		  themes: {
+		themes: {
 			dark: {
-			  primary: '#00F195',
-			  accent: '#F2BF68',
-			  secondary: '#ffe18d',
-			  success: '#4CAF50',
-			  info: '#2196F3',
-			  warning: '#FB8C00',
-			  error: '#FF5252'
+				primary: '#00F195',
+				accent: '#F2BF68',
+				secondary: '#ffe18d',
+				success: '#4CAF50',
+				info: '#2196F3',
+				warning: '#FB8C00',
+				error: '#FF5252',
 			},
 			light: {
-			  primary: '#02CB7F',
-			  accent: '#e91e63',
-			  secondary: '#30b1dc',
-			  success: '#4CAF50',
-			  info: '#2196F3',
-			  warning: '#FB8C00',
-			  error: '#FF5252'
-			}
-		  }
-		}
+				primary: '#02CB7F',
+				accent: '#e91e63',
+				secondary: '#30b1dc',
+				success: '#4CAF50',
+				info: '#2196F3',
+				warning: '#FB8C00',
+				error: '#FF5252',
+			},
+		},
+	},
   }),
   components: { App },
   router,

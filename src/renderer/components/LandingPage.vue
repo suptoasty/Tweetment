@@ -39,6 +39,8 @@
 			</v-input>
 		</v-row>
 
+		<v-divider></v-divider>
+
 		<v-container v-for="response in responses">
 			<v-card
 				class="mx-auto"
@@ -59,6 +61,8 @@
 				<v-card-text class="headline font-weight-bold">
 					{{response.tweet}}
 				</v-card-text>
+
+				<v-divider></v-divider>
 
 				<v-card-actions>
 					<v-list-item class="grow">
